@@ -1,0 +1,1743 @@
+@charset "UTF-8";
+#cboxPrevious,
+#cboxNext,
+#cboxClose,
+#cboxSlideshow {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  width: auto;
+  background: none;
+}
+
+#colorbox,
+#cboxOverlay,
+#cboxWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+#colorbox {
+  box-sizing: content-box;
+  outline: 0;
+  box-shadow: -5px 15px 12px -12px rgba(0, 0, 0, 0.75);
+}
+
+#cboxOverlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+#cboxWrapper {
+  max-width: none;
+}
+
+#cboxMiddleLeft {
+  clear: left;
+}
+
+#cboxBottomLeft {
+  clear: left;
+}
+
+#cboxContent {
+  position: relative;
+  margin-top: 0;
+  margin-right: 0;
+  background-color: transparent;
+  box-sizing: content-box;
+}
+
+#cboxLoadedContent {
+  overflow: auto;
+  background-color: transparent;
+  box-sizing: content-box;
+}
+
+#cboxTitle {
+  margin: 0;
+  position: absolute;
+  top: -20px;
+  left: 0;
+  color: #ccc;
+}
+
+#cboxLoadingOverlay,
+#cboxLoadingGraphic {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#cboxLoadingGraphic {
+  background: url("https://www.juksy.com/img/mobile/loading.svg") no-repeat center center;
+}
+
+#cboxPrevious {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  margin-top: -32px;
+  background: url("https://www.juksy.com/img/mobile/controls.png") no-repeat top left;
+  width: 28px;
+  height: 65px;
+  text-indent: -9999px;
+}
+
+#cboxPrevious:active {
+  outline: 0;
+}
+
+#cboxPrevious:hover {
+  background-position: bottom left;
+}
+
+#cboxNext {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  margin-top: -32px;
+  background: url("https://www.juksy.com/img/mobile/controls.png") no-repeat top right;
+  width: 28px;
+  height: 65px;
+  text-indent: -9999px;
+}
+
+#cboxNext:active {
+  outline: 0;
+}
+
+#cboxNext:hover {
+  background-position: bottom right;
+}
+
+#cboxClose {
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: block;
+  background: url("https://www.juksy.com/img/mobile/close_btn.png") no-repeat center center;
+  width: 30px;
+  height: 30px;
+  text-indent: -9999px;
+  background-size: 60% auto;
+  transition-duration: 300ms;
+}
+
+#cboxClose:active {
+  outline: 0;
+}
+
+#cboxClose:hover {
+  background-size: 80% auto;
+}
+
+#cboxSlideshow {
+  cursor: pointer;
+  position: absolute;
+  top: -20px;
+  right: 90px;
+  color: #fff;
+}
+
+#cboxSlideshow:active {
+  outline: 0;
+}
+
+.cboxPhoto {
+  float: left;
+  margin: auto;
+  border: 0;
+  display: block;
+  max-width: none;
+}
+
+.cboxIframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+}
+
+#cboxError {
+  padding: 50px;
+  border: 1px solid #ccc;
+}
+
+#cboxCurrent {
+  position: absolute;
+  top: -20px;
+  right: 0;
+  color: #ccc;
+}
+
+html,
+body,
+#sb-site,
+.sb-site-container,
+.sb-slidebar {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  height: auto;
+  position: relative;
+}
+
+html.sb-scroll-lock.sb-active:not(.sb-static) {
+  overflow: hidden;
+}
+
+#sb-site,
+.sb-site-container {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+  background-color: #ffffff;
+}
+
+#sb-site:before,
+#sb-site:after,
+.sb-site-container:before,
+.sb-site-container:after {
+  content: ' ';
+  display: table;
+}
+
+#sb-site:before,
+#sb-site:after,
+.sb-site-container:before,
+.sb-site-container:after {
+  clear: both;
+}
+
+.sb-slidebar {
+  height: 100%;
+  overflow-y: auto;
+  position: fixed;
+  top: 0;
+  z-index: 0;
+  display: none;
+  background-color: #222222;
+}
+
+.sb-slidebar,
+.sb-slidebar * {
+  -webkit-transform: translateZ(0px);
+}
+
+.sb-left {
+  left: 0;
+}
+
+.sb-right {
+  right: 0;
+}
+
+html.sb-static .sb-slidebar,
+.sb-slidebar.sb-static {
+  position: absolute;
+}
+
+.sb-slidebar.sb-active {
+  display: block;
+}
+
+.sb-style-overlay {
+  z-index: 9999;
+}
+
+.sb-momentum-scrolling {
+  -webkit-overflow-scrolling: touch;
+}
+
+.sb-slidebar {
+  width: 30%;
+}
+
+.sb-width-thin {
+  width: 15%;
+}
+
+.sb-width-wide {
+  width: 45%;
+}
+
+@media (max-width: 480px) {
+  .sb-slidebar {
+    width: 70%;
+  }
+  .sb-width-thin {
+    width: 55%;
+  }
+  .sb-width-wide {
+    width: 85%;
+  }
+}
+
+@media (min-width: 481px) {
+  .sb-slidebar {
+    width: 55%;
+  }
+  .sb-width-thin {
+    width: 40%;
+  }
+  .sb-width-wide {
+    width: 70%;
+  }
+}
+
+@media (min-width: 768px) {
+  .sb-slidebar {
+    width: 40%;
+  }
+  .sb-width-thin {
+    width: 25%;
+  }
+  .sb-width-wide {
+    width: 55%;
+  }
+}
+
+@media (min-width: 992px) {
+  .sb-slidebar {
+    width: 30%;
+  }
+  .sb-width-thin {
+    width: 15%;
+  }
+  .sb-width-wide {
+    width: 45%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .sb-slidebar {
+    width: 20%;
+  }
+  .sb-width-thin {
+    width: 5%;
+  }
+  .sb-width-wide {
+    width: 35%;
+  }
+}
+
+.sb-slide,
+#sb-site,
+.sb-site-container,
+.sb-slidebar {
+  transform: translate(0px);
+  transition: transform 400ms ease;
+  -webkit-transition-property: -webkit-transform, left, right;
+  -webkit-backface-visibility: hidden;
+}
+
+.sb-hide {
+  display: none;
+}
+
+html {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-size: 16px;
+  letter-spacing: 1px;
+  font-family: Roboto Condensed, Microsoft JhengHei, sans-serif;
+  color: #484848;
+}
+
+h1 {
+  margin: 0;
+  padding: 0;
+  font-size: inherit;
+  font-weight: normal;
+}
+
+h2 {
+  margin: 0;
+  padding: 0;
+  font-size: inherit;
+  font-weight: normal;
+}
+
+h3 {
+  margin: 0;
+  padding: 0;
+  font-size: inherit;
+  font-weight: normal;
+}
+
+h4 {
+  margin: 0;
+  padding: 0;
+  font-size: inherit;
+  font-weight: normal;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+blockquote {
+  margin: 0;
+  padding: 0;
+}
+
+figure {
+  margin: 0;
+  padding: 0;
+}
+
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  transition: .5s;
+}
+
+img {
+  border: 0;
+}
+
+.clearBoth {
+  clear: both;
+}
+
+.hide {
+  display: none;
+}
+
+.center {
+  text-align: center;
+}
+
+.contentWidth {
+  padding-left: 10px;
+  padding-right: 10px;
+  margin: 0 auto;
+}
+
+.txtWidth {
+  padding-left: 10px;
+  padding-right: 10px;
+  margin: 0 auto;
+}
+
+.minHeight65 {
+  min-height: 65vh;
+}
+
+.minHeight100 {
+  min-height: 100vh;
+}
+
+.topFixed {
+  width: 100%;
+  line-height: 60px;
+  position: fixed;
+  z-index: 2;
+}
+
+header ul.headWrap {
+  overflow: auto;
+  background-color: #0a58a6;
+}
+
+header ul.headWrap li {
+  list-style: none;
+  display: block;
+  width: 33%;
+  float: left;
+}
+
+header ul.headWrap li .openMenu {
+  width: 30px;
+  height: 30px;
+  background-image: url("https://www.juksy.com/img/mobile/menu_btn.gif");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100% auto;
+  margin: 15px 0 0 15px;
+  cursor: pointer;
+}
+
+header ul.headWrap li .logo {
+  display: block;
+  width: 100%;
+  height: 60px;
+  background-image: url("https://www.juksy.com/img/mobile/logo.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100px auto;
+}
+
+header ul.headWrap li .searchRight {
+  width: 40px;
+  height: 40px;
+  background-image: url("https://www.juksy.com/img/mobile/search_right.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 25px auto;
+  float: right;
+  margin: 10px 10px 0 0;
+  cursor: pointer;
+}
+
+.dfp_center {
+  margin: 10px auto;
+  display: table;
+}
+
+.dfp_center_popup {
+  margin: 0 auto;
+}
+
+.dfp_center_bottom {
+  width: 320px;
+  margin: 0 auto;
+}
+
+.newsearch_close {
+  width: 60px;
+  height: 60px;
+  background-color: #e6e6e6;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 2;
+  background-image: url("https://www.juksy.com/img/mobile/search_right_close.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 60px auto;
+  display: none;
+}
+
+#newsearch {
+  height: auto;
+  background-color: #e6e6e6;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 2;
+  background-image: url("https://www.juksy.com/img/mobile/search_right_close.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 60px auto;
+  display: none;
+}
+
+.newsearch_cover {
+  position: fixed;
+  left: 0;
+  top: 60px;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  height: 100vh;
+  color: #4d4d4d;
+  display: none;
+}
+
+.newsearch_cover .searchbar {
+  background-color: #fff;
+}
+
+.newsearch_cover .searchbar form {
+  overflow: auto;
+  margin: 0;
+  padding: 10px 0;
+}
+
+.newsearch_cover .searchbar form input[type="submit"] {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  background-color: transparent;
+  display: block;
+  float: left;
+  background-image: url("https://www.juksy.com/img/mobile/search_right_black.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 20px auto;
+  margin: 0;
+  border: 0;
+}
+
+.newsearch_cover .searchbar form input[type="search"] {
+  width: 85%;
+  font-size: 16px;
+  background-color: transparent;
+  border: 0;
+  -webkit-appearance: none;
+  outline: none;
+  margin: 0;
+  padding: 10px 0;
+  display: block;
+  float: left;
+  box-shadow: none;
+}
+
+.newsearch_cover .keytitle {
+  background-color: #e6e6e6;
+  line-height: 3em;
+}
+
+.newsearch_cover .black {
+  width: 100%;
+  height: 100%;
+}
+
+.newsearch_cover ul.keywords {
+  background-color: #fff;
+  overflow: auto;
+  padding: 0;
+  border-top: 1px solid #ccc;
+}
+
+.newsearch_cover ul.keywords li {
+  list-style: none;
+  float: left;
+  width: 33%;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+.newsearch_cover ul.keywords lili:nth-child(3n+3) {
+  border-right: none;
+}
+
+.newsearch_cover ul.keywords li a {
+  display: block;
+  text-align: center;
+  font-weight: bold;
+}
+
+.noimg {
+  background-image: url("https://www.juksy.com/img/mobile/noimg152.jpg");
+  background-size: 76px 76px;
+  background-repeat: repeat;
+}
+
+#cover {
+  display: none;
+  height: 100%!important;
+  min-height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  transition: opacity .2s linear 0s;
+  z-index: 1000;
+}
+
+#cover div.popup-inner {
+  text-align: center;
+  vertical-align: middle;
+  width: 100%;
+}
+
+#cover div.popup-inner div.popup-content {
+  display: inline-block;
+  outline: none;
+  text-align: left;
+  position: relative;
+  padding-top: 40px;
+}
+
+#cover div.popup-inner div.popup-content button {
+  background: transparent url(https://www.juksy.com/img/mobile/close_btn_dfp.png);
+  background-size: 35px 35px;
+  width: 35px;
+  height: 35px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+}
+
+#cover.active {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-pack: center;
+  justify-content: center;
+  opacity: 1;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+#sb-site.top6 {
+  padding-top: 60px;
+  background-color: #e6e6e6;
+}
+
+main.channel {
+  padding-top: 40px;
+}
+
+.bottomFixed {
+  width: 100%;
+  position: fixed;
+  z-index: 2;
+  bottom: 0;
+}
+
+footer {
+  height: 50px;
+  width: 100%;
+  color: #FFFFFF;
+  background-color: #0a58a6;
+}
+
+footer.article {
+  height: 100px;
+}
+
+footer ul.footWrap {
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+footer ul.footWrap li {
+  list-style: none;
+  display: block;
+  float: left;
+  margin: 10px 10px 0 0;
+}
+
+footer ul.footWrap li img.logo {
+  width: 16px;
+  height: 16px;
+}
+
+footer ul.footWrap li:first-child {
+  margin: 17px 10px 0 0;
+}
+
+footer ul.footWrap li.txt {
+  line-height: 30px;
+  font-size: 20px;
+  letter-spacing: normal;
+}
+
+footer ul.footWrap li.fb {
+  width: 87px;
+  height: 20px;
+  overflow: hidden;
+  margin: 15px 0 0 0;
+  float: right;
+}
+
+.sb-slidebar {
+  background-color: #e6e6e6;
+  border-right: 1px solid #484848;
+}
+
+form.search {
+  overflow: auto;
+  background-color: #323233;
+  margin: 0;
+}
+
+form.search .btn {
+  width: 15%;
+  height: 41px;
+  cursor: pointer;
+  background-color: transparent;
+  border-radius: 0;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  display: block;
+  float: left;
+  background-image: url("https://www.juksy.com/img/mobile/search_icon.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 20px auto;
+}
+
+form.search .txt {
+  width: 85%;
+  font-size: 16px;
+  background-color: transparent;
+  color: #FFFFFF;
+  border: 0;
+  -webkit-appearance: none;
+  outline: none;
+  margin: 0;
+  padding: 10px 0;
+  display: block;
+  float: left;
+}
+
+form.search .txt::-moz-placeholder {
+  color: #fff;
+  opacity: 0.5;
+}
+
+form.search .txt:-moz-placeholder {
+  color: #fff;
+  opacity: 0.5;
+}
+
+form.search .txt::-webkit-input-placeholder {
+  color: #fff;
+  opacity: 0.5;
+}
+
+form.search .txt:-ms-input-placeholder {
+  color: #fff;
+  opacity: 0.5;
+}
+
+nav ul li {
+  list-style: none;
+  line-height: 20px;
+  background-color: #e6e6e6;
+  border-bottom: 2px solid #CCCCCC;
+  display: block;
+  color: #4d4d4d;
+}
+
+nav ul li.subject {
+  color: #0a58a6;
+}
+
+nav ul li a {
+  display: block;
+}
+
+nav ul li h3 {
+  padding: 0.9em 1.5em;
+  font-weight: bold;
+}
+
+nav ul li .menu-icon:before {
+  content: "";
+  display: block;
+  margin-right: 10px;
+  float: left;
+  width: 20px;
+  height: 20px;
+  background-image: url("https://www.juksy.com/img/mobile/icon_sprite.png");
+  background-repeat: no-repeat;
+  background-size: 60px auto;
+}
+
+nav ul li .user:before {
+  background-position: left 0px;
+}
+
+nav ul li .hottest:before {
+  background-position: left -20px;
+}
+
+nav ul li .entertain:before {
+  background-position: left -40px;
+}
+
+nav ul li .topic:before {
+  background-position: left -60px;
+}
+
+nav ul li .tech:before {
+  background-position: left -80px;
+}
+
+nav ul li .novel:before {
+  background-position: left -100px;
+}
+
+nav ul li .video:before {
+  background-position: left -120px;
+}
+
+nav ul li .recruit:before {
+  background-position: left -140px;
+}
+
+nav ul li .aboutmenu:before {
+  background-position: left -160px;
+}
+
+nav ul li .beauty:before {
+  background-position: left -180px;
+}
+
+nav ul li .category:before {
+  background-position: center 0px;
+}
+
+nav ul li .fashion:before {
+  background-position: center -20px;
+}
+
+nav ul li .movie:before {
+  background-position: center -40px;
+}
+
+nav ul li .comic:before {
+  background-position: center -60px;
+}
+
+nav ul li .sport:before {
+  background-position: center -80px;
+}
+
+nav ul li .car:before {
+  background-position: center -100px;
+}
+
+nav ul li .activity:before {
+  background-position: center -120px;
+}
+
+nav ul li .events:before {
+  background-position: center -160px;
+}
+
+nav ul li .newest:before {
+  background-position: right 0px;
+}
+
+nav ul li .wear:before {
+  background-position: right -20px;
+}
+
+nav ul li .design:before {
+  background-position: right -40px;
+}
+
+nav ul li .game:before {
+  background-position: right -60px;
+}
+
+nav ul li .girl:before {
+  background-position: right -80px;
+}
+
+nav ul li .animal:before {
+  background-position: right -100px;
+}
+
+nav ul li .contact:before {
+  background-position: right -120px;
+}
+
+nav ul li .sneaker:before {
+  background-position: right -160px;
+}
+
+nav ul li .hasSub {
+  content: "";
+  display: block;
+  float: right;
+  width: 20px;
+  height: 20px;
+  background-repeat: no-repeat;
+  background-position: center -140px;
+  background-size: 60px auto;
+  background-image: url("https://www.juksy.com/img/mobile/icon_sprite.png");
+}
+
+nav ul ul {
+  display: none;
+}
+
+nav ul ul li {
+  background-color: #fff;
+  border: 0;
+}
+
+nav ul ul li a {
+  padding: 0 1.5em;
+}
+
+nav ul ul li h4 {
+  padding: 0.9em 0;
+  border-top: 1px solid #CCCCCC;
+}
+
+nav ul ul li:first-child h4 {
+  border: 0;
+}
+
+nav ul ul.subMenu {
+  overflow: auto;
+  display: none;
+}
+
+nav ul ul.subMenu .subMenu-left {
+  float: left;
+  width: 49.5%;
+  border-right: 1px solid #CCCCCC;
+}
+
+nav ul ul.subMenu .subMenu-right {
+  float: right;
+  width: 50%;
+}
+
+nav ul ul.subMenu li {
+  border: 0;
+}
+
+nav ul ul.subMenu li.highlight {
+  color: #FFFFFF;
+  background-color: #0071bc;
+}
+
+nav ul ul.subMenu li a {
+  padding: 0px;
+}
+
+nav ul ul.subMenu li h4 {
+  padding: 0.9em 0px 0.9em 1.5em;
+}
+
+nav ul ul.subMenu ul {
+  display: none;
+}
+
+nav ul ul.subMenu ul li {
+  background-color: #f2f2f2;
+  width: auto;
+  border: 0;
+}
+
+nav ul ul.subMenu ul li a {
+  padding: 0 1.5em;
+}
+
+nav ul ul.subMenu ul li span {
+  display: block;
+  padding: 0.9em 0;
+  border-bottom: 1px solid #999999;
+}
+
+nav ul ul.subMenu ul li:last-child span {
+  border: 0;
+}
+
+.innerNav {
+  display: none;
+  background-color: #fff;
+  color: #484848;
+  box-shadow: 0px 3px 2px 0px rgba(0, 0, 0, 0.1);
+  height: 40px;
+  overflow: hidden;
+}
+
+.innerNav .arrowL,
+.innerNav .arrowR {
+  width: 40px;
+  height: 40px;
+  background-image: url("https://www.juksy.com/img/mobile/channel/navbar_arrow.png");
+  background-size: 80px 80px;
+}
+
+.innerNav .arrowL {
+  float: left;
+  background-position: left top;
+}
+
+.innerNav .arrowL.canMove {
+  background-position: left bottom;
+}
+
+.innerNav .arrowR {
+  float: right;
+  background-position: right top;
+}
+
+.innerNav .arrowR.canMove {
+  background-position: right bottom;
+}
+
+.innerNavsub {
+  display: none;
+  color: #fff;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 40px;
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.innerNavsub ul {
+  width: 320px;
+  overflow: auto;
+  display: none;
+  margin: 0 auto;
+}
+
+.innerNavsub ul li {
+  list-style: none;
+  display: block;
+  float: left;
+}
+
+.innerNavsub ul li a {
+  line-height: 40px;
+  padding: 0 9px;
+  display: block;
+}
+
+.copyright {
+  font-size: 12px;
+  text-align: center;
+  line-height: 20px;
+  padding: 10px 0;
+  letter-spacing: 0;
+  color: #808080;
+}
+
+@media screen and (min-width: 768px) {
+  body {
+    font-size: 20px;
+  }
+}
+
+article {
+  background-color: #fff;
+}
+
+.articleHead {
+  padding: 10px 0;
+  background-color: #FFFFFF;
+}
+
+.articleHead .articleHeadWrap {
+  overflow: auto;
+  font-size: 18px;
+  line-height: 1.5em;
+  font-weight: bold;
+}
+
+.articleHead .articleHeadWrap a.tag {
+  display: block;
+  float: left;
+  width: 47px;
+  text-align: center;
+  border: 1px solid #d1d3d4;
+}
+
+.articleHead .articleHeadWrap h1 {
+  float: right;
+  width: 80%;
+  font-weight: bold;
+}
+
+.articleHeadLine {
+  margin: 0 10px 10px 10px;
+  border-bottom: 1px solid #c0c0c0;
+}
+
+.articleWrap {
+  background-color: #FFFFFF;
+  line-height: 1.8em;
+  font-size: 16px;
+}
+
+.articleWrap.custom {
+  padding-top: 10px;
+}
+
+.articleWrap .articleMain {
+  font-family: Roboto Condensed, Microsoft JhengHei, sans-serif;
+  letter-spacing: 3px;
+  text-align: justify;
+}
+
+.articleWrap .articleMain h1 {
+  color: #2969B0;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px 0;
+  letter-spacing: 2px;
+}
+
+.articleWrap .articleMain h2 {
+  color: #f37934;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 0;
+  letter-spacing: 2px;
+}
+
+.articleWrap .articleMain img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.articleWrap .articleMain p {
+  margin-bottom: 10px;
+}
+
+.articleWrap .articleMain a {
+  color: #0a58a6;
+}
+
+.articleWrap .articleMain .figcaption {
+  display: block;
+  font-size: 10px;
+  text-align: right;
+  color: #ccc;
+  margin-bottom: 10px;
+}
+
+.articleWrap .articleMain .figcaption a {
+  color: #ccc;
+}
+
+.articleWrap .articleMain ul.figcaption {
+  letter-spacing: 1px;
+  margin: 5px 0 10px 0;
+  text-align: inherit;
+}
+
+.articleWrap .articleMain ul.figcaption li {
+  list-style: none;
+  display: block;
+}
+
+.articleWrap .articleMain ul.figcaption li.h1 {
+  font-size: 14px;
+  text-align: left;
+  color: #484848;
+  letter-spacing: 2px;
+}
+
+.articleWrap .articleMain ul.figcaption li.desc {
+  font-size: 12px;
+  text-align: justify;
+  line-height: 2em;
+  color: #999999;
+  letter-spacing: 1.6px;
+}
+
+.articleWrap .articleMain ul.figcaption li.desc a {
+  color: #999999;
+  text-decoration: underline;
+}
+
+.articleWrap .articleMain ul.figcaption li.cite {
+  font-size: 10px;
+  text-align: right;
+  line-height: 2em;
+  color: #ccc;
+}
+
+.articleWrap .articleMain ul.figcaption li.cite a {
+  color: #ccc;
+}
+
+.articleWrap .quote {
+  margin: 10px auto;
+}
+
+.article_juksy_recommend {
+  padding: 20px 10px 0 10px;
+  line-height: 1.8em;
+  letter-spacing: 1px;
+}
+
+.article_juksy_recommend .title {
+  font-size: 18px;
+  color: #738498;
+  font-weight: bold;
+}
+
+.article_juksy_recommend ul.list {
+  margin: 10px 0 20px 20px;
+}
+
+.article_juksy_recommend ul.list li {
+  list-style: square;
+  display: list-item;
+  color: #0091EA;
+  margin-bottom: 10px;
+}
+
+.article_juksy_recommend ul.list li a {
+  font-size: 16px;
+  text-decoration: underline;
+}
+
+.article_juksy_recommend a.banner {
+  display: block;
+}
+
+.article_juksy_recommend a.banner img {
+  width: 100%;
+  height: auto;
+}
+
+ul.moreArticle li {
+  list-style: none;
+  display: block;
+  border: 1px solid #b3b3b3;
+  padding: 10px 0;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+ul.moreArticle li .tag {
+  border: 1px solid #b3b3b3;
+  padding: 5px 10px;
+  margin-left: 10px;
+}
+
+ul.moreArticle li img {
+  width: 100%;
+  margin-top: 10px;
+  display: block;
+}
+
+ul.moreArticle li .title {
+  font-size: 18px;
+  letter-spacing: 0;
+  margin-top: 10px;
+}
+
+.picSource {
+  font-size: 12px;
+  color: #999999;
+  padding-bottom: 20px;
+}
+
+#articlepage {
+  text-align: center;
+  color: #0a58a6;
+  margin-top: 20px;
+}
+
+#articlepage a {
+  margin: 0 10px;
+}
+
+#articlepage a:hover {
+  text-decoration: underline;
+}
+
+#articlepage a.selected {
+  text-decoration: underline;
+}
+
+.followUs h3 {
+  display: block;
+  font-size: 18px;
+  font-weight: bold;
+  color: #FFFFFF;
+  padding: 10px 10px;
+  background-color: #484848;
+}
+
+.followUs .dfp_native {
+  margin: 10px;
+}
+
+.followUs ul {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  overflow: auto;
+}
+
+.followUs ul li {
+  display: block;
+  list-style: none;
+  float: left;
+  width: 33%;
+}
+
+.followUs ul li:last-child {
+  width: 34%;
+}
+
+.followUs ul li:last-child a h4 {
+  border-right: none;
+}
+
+.followUs ul li a {
+  display: block;
+  padding: 10px 0;
+  background-color: #FFFFFF;
+}
+
+.followUs ul li a h4 {
+  display: block;
+  padding: 25px 0px 0px 0px;
+  text-align: center;
+  color: #999999;
+  letter-spacing: normal;
+  font-size: 14px;
+  background-repeat: no-repeat;
+  background-size: auto 20px;
+  background-position: center top;
+  border-right: 1px solid #999999;
+}
+
+.followUs ul li.fb a h4 {
+  background-image: url("https://www.juksy.com/img/mobile/article/followus_fb_gray.png");
+}
+
+.followUs ul li.ig a h4 {
+  background-image: url("https://www.juksy.com/img/mobile/article/followus_ig_gray.png");
+}
+
+.followUs ul li.yt a h4 {
+  background-image: url("https://www.juksy.com/img/mobile/article/followus_yt_gray.png");
+}
+
+.share {
+  overflow: auto;
+  padding-bottom: 10px;
+}
+
+.share .btn {
+  height: 40px;
+  line-height: 40px;
+  color: #FFFFFF;
+  cursor: pointer;
+  overflow: auto;
+  float: left;
+}
+
+.share .btn.fb {
+  width: 65%;
+  background-color: #0a58a6;
+  border: 1px solid #768BB8;
+}
+
+.share .btn.fb span {
+  border-left: 1px solid #768BB8;
+}
+
+.share .btn.fb:before {
+  background-image: url("https://www.juksy.com/img/mobile/article/share_fb.png");
+  border-right: 1px solid #293f68;
+}
+
+.share .btn.line {
+  width: 33%;
+  background-color: #00C300;
+  border: 1px solid #4dd54d;
+  float: right;
+}
+
+.share .btn.line span {
+  border-left: 1px solid #4dd54d;
+}
+
+.share .btn.line:before {
+  background-image: url("https://www.juksy.com/img/mobile/article/share_line.png");
+  border-right: 1px solid #019c00;
+}
+
+.share .btn:before {
+  content: "";
+  display: block;
+  float: left;
+  width: 40px;
+  height: 40px;
+  background-repeat: no-repeat;
+  background-size: auto 20px;
+  background-position: center center;
+}
+
+.share .btn span {
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  letter-spacing: 3px;
+}
+
+.videoWrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+}
+
+.videoWrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.recommend h3 {
+  display: block;
+  font-size: 18px;
+  font-weight: bold;
+  color: #FFFFFF;
+  padding: 10px 10px;
+  background-color: #484848;
+}
+
+.recommend ul {
+  overflow: auto;
+  padding: 0 10px;
+  margin-bottom: 10px;
+}
+
+.recommend ul li {
+  list-style: none;
+  display: block;
+  width: 49%;
+  margin: 10px 1% 0 0;
+  background-color: #FFFFFF;
+  float: left;
+}
+
+.recommend ul li img {
+  display: block;
+  width: 100%;
+}
+
+.recommend ul li .title {
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.5em;
+  padding: 5px;
+  letter-spacing: 0;
+  height: 6em;
+  overflow: hidden;
+}
+
+.recommend ul li .videoImg {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  background: url("https://www.juksy.com/img/mobile/loading.svg") no-repeat center center;
+}
+
+.recommend ul li .videoImg img {
+  display: block;
+  margin: auto;
+  max-width: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: auto;
+  height: auto;
+}
+
+.bottomFixed {
+  width: 100%;
+  position: fixed;
+  z-index: 2;
+  bottom: 0;
+}
+
+.picNotice {
+  background-color: #FFFFFF;
+}
+
+.picNotice div {
+  line-height: 2em;
+  padding: 20px 10px;
+  text-align: justify;
+}
+
+.picNotice a {
+  display: block;
+  padding: 20px 10px;
+  background-color: #f2f2f2;
+  color: #0a58a6;
+  overflow: hidden;
+}
+
+.picNotice a:hover {
+  color: #484848;
+}
+
+.picNotice a span {
+  display: block;
+  float: right;
+}
+
+#content18 {
+  width: 300px;
+  height: 235px;
+  background-color: rgba(255, 255, 255, 0.8);
+  background-image: url("https://www.juksy.com/img/mobile/article/r18.png");
+  background-size: 26px 34px;
+  background-repeat: no-repeat;
+  background-position: center 21px;
+  border-bottom: 15px solid #0a58a6;
+}
+
+#content18 .title {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  color: #484848;
+  letter-spacing: 3px;
+  padding-top: 76px;
+  padding-bottom: 24px;
+}
+
+#content18 .title .row2 {
+  font-size: 16px;
+  display: block;
+  margin-top: 5px;
+  font-weight: normal;
+}
+
+#content18 ul.btn {
+  overflow: auto;
+  padding: 0 20px;
+}
+
+#content18 ul.btn li {
+  list-style: none;
+  display: block;
+  float: left;
+  background-color: #1fb8de;
+  border: 1px solid #1fb8de;
+  font-size: 20px;
+  color: #fff;
+  text-align: center;
+  line-height: 1.5em;
+  cursor: pointer;
+  padding: 10px 17px;
+  transition: .5s;
+}
+
+#content18 ul.btn li:last-child {
+  float: right;
+  background-color: transparent;
+  border: 1px solid #666666;
+  color: #484848;
+}
+
+@media screen and (min-width: 336px) {
+  .articleHead .articleHeadWrap h1 {
+    width: 83%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .share .fb {
+    width: 90%;
+  }
+  .recommend ul li .title {
+    font-size: 18px;
+  }
+}
+
+a.moreBtn {
+  width: 141px;
+  height: 40px;
+  display: inline-block;
+  background-image: url("https://www.juksy.com/img/mobile/event/smilepay/smilepay_yellow_btn.png");
+  background-repeat: repeat-x;
+  line-height: 40px;
+  font-weight: bold;
+  font-size: 20px;
+  text-decoration: none;
+  color: #000000;
+  text-align: center;
+  box-shadow: 2px 2px 10px 0px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+}
+
+a.moreBtn:hover {
+  color: #C1272D;
+  background-image: url("https://www.juksy.com/img/mobile/event/smilepay/smilepay_yellow_btn_hover.png");
+  box-shadow: inset 3px 3px 10px 0px rgba(0, 0, 0, 0.75);
+}
+
+form.smilepay {
+  display: inline-block;
+  font-weight: bold;
+}
+
+form.smilepay .submitRec {
+  width: 150px;
+  border-radius: 15px;
+  background-color: #333333;
+  color: #CCCCCC;
+  text-align: center;
+  font-size: 14px;
+  padding: 10px;
+  line-height: 1em;
+  letter-spacing: 1px;
+}
+
+form.smilepay .submitRec input {
+  display: block;
+  width: 140px;
+  height: 40px;
+  line-height: 0.7em;
+  margin: 0 auto 10px auto;
+  background-image: url("https://www.juksy.com/img/mobile/event/smilepay/smilepay_red_btn.png");
+  background-repeat: no-repeat;
+  box-shadow: 2px 2px 10px 0px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  border: 0;
+  color: #FFFFFF;
+  font-size: 20px;
+  text-indent: 30px;
+  cursor: pointer;
+  outline: none;
+  font-weight: bold;
+}
+
+form.smilepay .submitRec input:hover {
+  background-image: url("https://www.juksy.com/img/mobile/event/smilepay/smilepay_red_btn_hover.png");
+}
