@@ -58,7 +58,7 @@
     googletag.defineSlot('/35943210/juksy_test_m_content_320x480_takeover', [320, 480], 'div-gpt-ad-1485342012612-0').addService(googletag.pubads());
     // 單一請求會照成無效曝光，必須關閉 SRA mode
     googletag.pubads().enableSingleRequest();
-    // googletag.pubads().collapseEmptyDivs();
+    googletag.pubads().collapseEmptyDivs();
     googletag.enableServices();
   });
   </script>
@@ -1208,6 +1208,13 @@
           </div>
         </div>
         <div class="articleHeadLine"></div>
+        <div id='div-gpt-ad-1485342012612-0'>
+        </div>
+        <script>
+        googletag.cmd.push(function() {
+          googletag.display('div-gpt-ad-1485342012612-0');
+        });
+        </script>
         <div id='div-gpt-ad-1485342442838-0' style='height:200px; width:355px;'>
         </div>
         <script>
@@ -1543,17 +1550,11 @@
     </div>
   </div>
   <a title="TOP" id="goTop"></a>
-  <div id="cover" class="active">
+  <div id="cover">
     <div class="popup-inner" onclick="document.getElementById(&#39;cover&#39;).className =&#39;&#39;;">
       <div id="popupAd" class="popup-content" style="display: inline-block;">
         <button onclick="document.getElementById(&#39;cover&#39;).className =&#39;&#39;;"></button>
-        <div id='div-gpt-ad-1485342012612-0' style='height:480px; width:320px;'>
-        </div>
-        <script>
-        googletag.cmd.push(function() {
-          googletag.display('div-gpt-ad-1485342012612-0');
-        });
-        </script>
+        
       </div>
       <div id="bottomAd" class="popup-content" style="display: none;">
         <button onclick="document.getElementById(&#39;cover&#39;).className =&#39;&#39;;"></button>
